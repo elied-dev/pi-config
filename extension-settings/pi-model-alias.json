@@ -1,0 +1,49 @@
+{
+  "$schema": "./schemas/pi-model-alias.schema.json",
+  "aliases": [
+    {
+      "provider": "github-copilot",
+      "model": "gpt-6.1-sol",
+      "alias": "sol",
+      "name": "GPT-6 Sol"
+    },
+    {
+      "provider": "github-copilot",
+      "model": "gpt-6-luna",
+      "alias": "luna",
+      "name": "GPT-6 Luna"
+    },
+    {
+      "provider": "github-copilot",
+      "model": "gpt-6-astra",
+      "alias": "astra",
+      "name": "GPT-6 Astra"
+    },
+    {
+      "provider": "github-copilot",
+      "model": "claude-opus-5.5",
+      "alias": "opus",
+      "name": "Claude Opus 5.5"
+    },
+    {
+      "provider": "github-copilot",
+      "model": "claude-sonnet-5.5",
+      "alias": "sonnet",
+      "name": "Claude Sonnet 5.5"
+    },
+    {
+      "provider": "github-copilot",
+      "model": "claude-fable-5.1",
+      "alias": "fable",
+      "name": "Claude Fable 5.1"
+    },
+    {
+      "provider": "github-copilot",
+      "model": "claude-haiku-5.5",
+      "alias": "haiku",
+      "name": "Claude Haiku 5.5"
+    }
+  ],
+  "providerAliases": [],
+  "stableProviderColumn": true
+}

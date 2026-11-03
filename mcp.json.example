@@ -1,0 +1,29 @@
+{
+  "mcpServers": {
+    "atlassian-mastercard": {
+      "command": "/Users/e137105/.local/bin/atlassian-mastercard-mcp",
+      "args": [],
+      "env": {
+        "ATLASSIAN_USER_EMAIL": "you@example.com"
+      }
+    },
+    "atlassian-dimple": {
+      "url": "https://mcp.atlassian.com/v1/mcp/authv2",
+      "lifecycle": "lazy"
+    },
+    "github-elied-dy": {
+      "url": "https://api.githubcopilot.com/mcp/",
+      "headers": {
+        "Authorization": "!echo Bearer $(gh auth token --hostname github.com --user elied-dy)"
+      },
+      "protocolVersion": "auto"
+    },
+    "github-elied-dev": {
+      "url": "https://api.githubcopilot.com/mcp/",
+      "headers": {
+        "Authorization": "!echo Bearer $(gh auth token --hostname github.com --user elied-dev)"
+      },
+      "protocolVersion": "auto"
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "lastChangelogVersion": "1.5.0",
+  "theme": "dark",
+  "defaultProvider": "github-copilot",
+  "defaultModel": "claude-sonnet-5.5",
+  "defaultThinkingModel": "medium",
+  "modelThinkingLevels": {
+    "github-copilot/gpt-6-luna": "medium",
+    "github-copilot/gpt-6.1-sol": "high",
+    "github-copilot/gpt-6-astra": "medium",
+    "github-copilot/claude-sonnet-5.5": "medium",
+    "github-copilot/claude-haiku-5.5": "low",
+    "github-copilot/claude-opus-5.5": "medium",
+    "github-copilot/claude-fable-5.1": "medium"
+  },
+  "packages": [
+    "npm:pi-open-tui",
+    {
+      "source": "npm:pi-mcp-adapter",
+      "extensions": [
+        "-index.ts"
+      ]
+    },
+    "npm:pi-web-access",
+    "npm:@tintinweb/pi-subagents",
+    "git:github.com/DietrichGebert/ponytail",
+    "npm:@zigai/pi-model-alias",
+    "git:github.com/obra/superpowers",
+    "npm:pi-model-switcher",
+    "npm:pi-agent-browser-native",
+    "npm:@juicesharp/rpiv-todo",
+    "npm:@joemccann/pi-pdf"
+  ],
+  "enabledModels": [
+    "github-copilot/gpt-6.1-sol",
+    "github-copilot/gpt-6-luna",
+    "github-copilot/gpt-6-astra",
+    "github-copilot/claude-fable-5.1",
+    "github-copilot/claude-opus-5.5",
+    "github-copilot/claude-sonnet-5.5",
+    "github-copilot/claude-haiku-5.5"
+  ],
+  "extensions": [
+    "+builtin:mcp"
+  ],
+  "extensionChangelogVersions": {
+    "{\"source\":\"npm:pi-web-access\",\"scope\":\"user\"}": "0.45.0",
+    "{\"source\":\"npm:@tintinweb/pi-subagents\",\"scope\":\"user\"}": "0.22.0",
+    "{\"source\":\"npm:pi-agent-browser-native\",\"scope\":\"user\"}": "0.9.6"
+  }
+}
