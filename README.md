@@ -30,4 +30,3 @@ Then run `/login` in pi. Packages in `settings.json` install on first start.
 ## Notes
 - Pushing needs the `elied-dev` GitHub account (the default `gh` account here is `elied-dy`).
 - Regenerate `install-skills.sh` after adding skills (it is built from `~/.agents/.skill-lock.json`).
-- Some skill sources (e.g. `DynamicYield/*`) may need private access; the script continues past failures.

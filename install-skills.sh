@@ -5,7 +5,6 @@ set -u
 fail=0
 add() { npx -y skills add "$@" -g -y || { echo "FAILED: $*" >&2; fail=1; }; }
 
-add DynamicYield/dy-awesome-copilot --skill eval-compare prepare-repo review-repo
 add aws/agent-toolkit-for-aws --skill amazon-bedrock aws-auth aws-containers aws-database aws-iam aws-security cloudfront
 add cloudflare/security-audit-skill --skill security-audit
 add danyuchn/asd-ste100-skill   # root-level skill repo
