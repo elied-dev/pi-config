@@ -2,14 +2,20 @@
 // Task-driven agents: when HC_TASKS=1 (set by hc-agent), the agent declares a task list, ticks tasks off,
 // and ends when all are done. Progress is published as hc terminal labels (task.progress 0-100,
 // task.stage "2/5 Write tests") which the agent-columns board mod draws as a bar under the card.
-import { spawn } from "node:child_process";
+import { spawn, execFileSync } from "node:child_process";
 import { Type } from "@earendil-works/pi-ai";
 import { defineTool } from "@earendil-works/pi-coding-agent";
 
 const id = process.env.HC_TERMINAL_ID;
 
+// Task mode applies to HC_TASKS=1 (set by hc-agent) and to any terminal started by another hc terminal.
+const isSubAgent = () => {
+  try { return Boolean(JSON.parse(execFileSync("hc", ["get", id], { encoding: "utf8", timeout: 3000 })).parent); }
+  catch { return false; }
+};
+
 export default function (pi) {
-  if (process.env.HC_TASKS !== "1" || !id) return;
+  if (!id || !(process.env.HC_TASKS === "1" || isSubAgent())) return;
   let tasks = [];
   let done = 0;
 
@@ -55,6 +61,20 @@ export default function (pi) {
         : `Done. Current: ${done + 1}/${tasks.length} ${tasks[done]}`);
     },
   }));
+
+  // Enforcement: no other tool before set_tasks, and no stopping with tasks left (2 nudges per run).
+  let nudges = 0;
+  pi.on("agent_start", () => { nudges = 0; });
+  pi.on("tool_call", (e) => {
+    if (!tasks.length && e.toolName !== "set_tasks")
+      return { block: true, reason: "Task mode: call set_tasks first with your ordered task list, then retry." };
+  });
+  pi.on("agent_before_settle", (e) => {
+    if (e.outcome !== "completed" || (tasks.length && done >= tasks.length) || nudges >= 2) return;
+    nudges++;
+    const left = tasks.length ? `Tasks not finished: ${tasks.slice(done).join("; ")}. Continue and call complete_task as you finish each.` : "You have not declared tasks. Call set_tasks now, then do the work.";
+    return { continue: true, entries: [{ type: "custom_message", customType: "tasks-reminder", content: left, display: false }] };
+  });
 
   // Resume: rebuild from the last tool result's details.
   pi.on("session_start", (_e, ctx) => {
